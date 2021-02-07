@@ -65,7 +65,7 @@ public class GameController : MonoBehaviour
 
     void OnMouseUp()
     {
-        Debug.Log("tembak");
+        //Debug.Log("tembak");
         if (_shotBird != null)
         {
             _shotBird.OnTap();

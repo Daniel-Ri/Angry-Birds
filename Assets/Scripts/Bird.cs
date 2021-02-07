@@ -44,6 +44,11 @@ public class Bird : MonoBehaviour
         //Do nothing
     }
 
+    public virtual void OnExplode()
+    {
+        //Do nothing
+    }
+
     void OnCollisionEnter2D(Collision2D col)
     {
         _state = BirdState.HitSomething;
@@ -55,6 +60,12 @@ public class Bird : MonoBehaviour
             RigidBody.velocity.sqrMagnitude >= _minVelocity)
         {
             _state = BirdState.Thrown;
+        }
+
+        if (_state == BirdState.HitSomething)
+        {
+            // Meledak jika menyentuh objek lain
+            OnExplode();
         }
 
         if ((_state == BirdState.Thrown || _state == BirdState.HitSomething) &&
@@ -69,7 +80,7 @@ public class Bird : MonoBehaviour
 
     }
 
-    private IEnumerator DestroyAfter(float second)
+    protected IEnumerator DestroyAfter(float second)
     {
         yield return new WaitForSeconds(second);
         Destroy(gameObject);
